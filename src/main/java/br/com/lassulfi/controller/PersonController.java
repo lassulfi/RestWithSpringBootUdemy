@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.lassulfi.model.Person;
+import br.com.lassulfi.data.vo.PersonVO;
 import br.com.lassulfi.service.PersonService;
 
 @RestController
@@ -24,19 +24,19 @@ public class PersonController {
 	private PersonService personService;
 
 	@PostMapping
-	public Person create(@RequestBody Person person) {
+	public PersonVO create(@RequestBody PersonVO person) {
 		
 		return personService.create(person);
 	}
 	
 	@PutMapping
-	public Person update(@RequestBody Person person) {
+	public PersonVO update(@RequestBody PersonVO person) {
 		
 		return personService.update(person);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public Person findById(@PathVariable("id") Long id) {
+	public PersonVO findById(@PathVariable("id") Long id) {
 		
 		return personService.findById(id);
 	}
@@ -50,7 +50,7 @@ public class PersonController {
 	}
 	
 	@GetMapping
-	public List<Person> findAll() {
+	public List<PersonVO> findAll() {
 		
 		return personService.findAll();
 	}

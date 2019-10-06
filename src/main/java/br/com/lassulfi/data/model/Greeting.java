@@ -1,4 +1,4 @@
-package br.com.lassulfi.model;
+package br.com.lassulfi.data.model;
 
 public class Greeting {
 
