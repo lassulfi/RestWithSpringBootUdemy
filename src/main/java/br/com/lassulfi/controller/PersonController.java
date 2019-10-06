@@ -3,11 +3,14 @@ package br.com.lassulfi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.lassulfi.model.Person;
@@ -20,37 +23,33 @@ public class PersonController {
 	@Autowired
 	private PersonService personService;
 
-	@RequestMapping(method = RequestMethod.POST, 
-			consumes = MediaType.APPLICATION_JSON_VALUE, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping
 	public Person create(@RequestBody Person person) {
 		
 		return personService.create(person);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, 
-			consumes = MediaType.APPLICATION_JSON_VALUE, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping
 	public Person update(@RequestBody Person person) {
 		
 		return personService.update(person);
 	}
 	
-	@RequestMapping(value = "/{id}", 
-			method = RequestMethod.GET, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{id}")
 	public Person findById(@PathVariable("id") Long id) {
 		
 		return personService.findById(id);
 	}
 		
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable("id") Long id) {
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
 		
 		personService.delete(id);
+		
+		return ResponseEntity.ok().build();
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping
 	public List<Person> findAll() {
 		
 		return personService.findAll();
