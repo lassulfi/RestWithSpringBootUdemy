@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.lassulfi.converter.DozerConverter;
+import br.com.lassulfi.converter.custom.PersonConverter;
 import br.com.lassulfi.data.model.Person;
 import br.com.lassulfi.data.vo.PersonVO;
+import br.com.lassulfi.data.vo.v2.PersonVOv2;
 import br.com.lassulfi.exceptions.ResourceNotFoundException;
 import br.com.lassulfi.repository.PersonRepository;
 
@@ -17,11 +19,21 @@ public class PersonService {
 	@Autowired
 	private PersonRepository personRepository;
 	
+	@Autowired
+	private PersonConverter personConverter;
+	
 	public PersonVO create(PersonVO person) {
 		var personEntity = DozerConverter.parseObject(person, Person.class);
 		var personVO = DozerConverter.parseObject(personRepository.save(personEntity), PersonVO.class);
 		
 		return personVO;
+	}
+	
+	public PersonVOv2 createv2(PersonVOv2 person) {
+		var personEntity = personConverter.convertVOtoEntity(person);
+		var personVOv2 = personConverter.convertEntityToVO(personRepository.save(personEntity));
+		
+		return personVOv2;
 	}
 	
 	public PersonVO update(PersonVO person) {
