@@ -18,7 +18,7 @@ import br.com.lassulfi.data.vo.v2.PersonVOv2;
 import br.com.lassulfi.service.PersonService;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person/v1")
 public class PersonController {
 	
 	@Autowired
@@ -30,11 +30,11 @@ public class PersonController {
 		return personService.create(person);
 	}
 	
-	@PostMapping("/v2")
-	public PersonVOv2 createv2(@RequestBody PersonVOv2 person) {
-		
-		return personService.createv2(person);
-	}
+//	@PostMapping("/v2")
+//	public PersonVOv2 createv2(@RequestBody PersonVOv2 person) {
+//		
+//		return personService.createv2(person);
+//	}
 	
 	@PutMapping
 	public PersonVO update(@RequestBody PersonVO person) {
