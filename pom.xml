@@ -59,6 +59,12 @@
 			<version>6.4.1</version>
 		</dependency>
 
+		<!-- Jackson Dataformat xml -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+
 		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>
