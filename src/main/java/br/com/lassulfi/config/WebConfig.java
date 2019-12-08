@@ -13,19 +13,41 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
 		/*
-		 * configurer.favorParameter(false) .ignoreAcceptHeader(false)
-		 * .defaultContentType(MediaType.APPLICATION_JSON) .mediaType("json",
-		 * MediaType.APPLICATION_JSON) .mediaType("xml", MediaType.APPLICATION_XML);
+		 * CONTENT NEGOTIATION VIA EXTENSION
+		 * 
+		 * ex.: http://localhost:8080/api/person/v1/1.json
+		 * 
+		 * configurer.favorParameter(false)
+		 * .ignoreAcceptHeader(false)
+		 * .defaultContentType(MediaType.APPLICATION_JSON)
+		 * .mediaType("json",MediaType.APPLICATION_JSON)
+		 * .mediaType("xml", MediaType.APPLICATION_XML);
 		 */
 		
-		configurer.favorPathExtension(false)
-		.favorParameter(true)
+		/*
+		 * CONTENT NEGOTIATION VIA QUERY PARAMETER
+		 * 
+		 * ex.: http://localhost:8080/api/v1/1?mediaType=xml
+		 * 
+		 * configurer.favorPathExtension(false) .favorParameter(true)
+		 * .parameterName("mediaType") .ignoreAcceptHeader(true)
+		 * .useRegisteredExtensionsOnly(false)
+		 * .defaultContentType(MediaType.APPLICATION_JSON) 
+		 * .mediaType("json",MediaType.APPLICATION_JSON)
+		 * .mediaType("xml", MediaType.APPLICATION_XML);
+		 */
+		
+		/**
+		 * CONTENT NEGOTIATION VIA HEADER
+		 */
+		configurer.favorPathExtension(false) 
+		.favorParameter(false)
 		.parameterName("mediaType")
-		.ignoreAcceptHeader(true)
+		.ignoreAcceptHeader(false)
 		.useRegisteredExtensionsOnly(false)
 		.defaultContentType(MediaType.APPLICATION_JSON)
-		.mediaType("json", MediaType.APPLICATION_JSON)
-		.mediaType("xml", MediaType.APPLICATION_XML);
+		.mediaType("json",MediaType.APPLICATION_JSON)
+		.mediaType("xml", MediaType.APPLICATION_XML);	
 	}
 
 	
