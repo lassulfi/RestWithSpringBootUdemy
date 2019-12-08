@@ -45,6 +45,12 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		
+		<!-- Flyway -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
 
 		<!-- Dozer Mapper -->
 		<dependency>
@@ -66,6 +72,33 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<release>11</release>
+				</configuration>
+			</plugin>
+			
+			<!-- Flyway Migration Plugin -->
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<configuration>
+					<url>jdbc:mysql://localhost:3306/rest_with_spring_boot_udemy</url>
+					<user>root</user>
+					<password>root</password>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>${mysql.version}</version>
+						<exclusions>
+							<exclusion>
+								<artifactId>slf4j-api</artifactId>
+								<groupId>org.slf4j</groupId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
