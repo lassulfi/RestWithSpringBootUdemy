@@ -22,49 +22,58 @@ import br.com.lassulfi.service.PersonService;
 @RestController
 @RequestMapping("/api/person/v1")
 public class PersonController {
-	
+
 	@Autowired
 	private PersonService personService;
 
-	@PostMapping(produces = {"application/json", "application/xml", "application/x-yaml"}, 
-			consumes = {"application/json", "application/xml", "application/x-yaml"})
+	@PostMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, consumes = {
+			"application/json", "application/xml", "application/x-yaml" })
 	public PersonVO create(@RequestBody PersonVO person) {
-		
-		return personService.create(person);
+
+		PersonVO personVO = personService.create(person);
+		personVO.add(linkTo(methodOn(PersonController.class).findById(personVO.getKey())).withSelfRel());
+
+		return personVO;
 	}
-	
+
 //	@PostMapping("/v2")
 //	public PersonVOv2 createv2(@RequestBody PersonVOv2 person) {
 //		
 //		return personService.createv2(person);
 //	}
-	
-	@PutMapping(produces = {"application/json", "application/xml", "application/x-yaml"}, 
-			consumes = {"application/json", "application/xml", "application/x-yaml"})
+
+	@PutMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, consumes = {
+			"application/json", "application/xml", "application/x-yaml" })
 	public PersonVO update(@RequestBody PersonVO person) {
-		
-		return personService.update(person);
+
+		PersonVO personVO = personService.update(person);
+		personVO.add(linkTo(methodOn(PersonController.class).findById(personVO.getKey())).withSelfRel());
+
+		return personVO;
 	}
-	
-	@GetMapping(value = "/{id}", produces = {"application/json", "application/xml", "application/x-yaml"})
+
+	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public PersonVO findById(@PathVariable("id") Long id) {
 		PersonVO personVO = personService.findById(id);
 		personVO.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
-		
+
 		return personVO;
 	}
-		
+
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-		
+
 		personService.delete(id);
-		
+
 		return ResponseEntity.ok().build();
 	}
-	
-	@GetMapping(produces = {"application/json", "application/xml", "application/x-yaml"})
+
+	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
 	public List<PersonVO> findAll() {
+
+		List<PersonVO> persons = personService.findAll();
+		persons.forEach(personVO -> personVO.add(linkTo(methodOn(PersonController.class).findById(personVO.getKey())).withSelfRel()));
 		
-		return personService.findAll();
+		return persons;
 	}
 }
