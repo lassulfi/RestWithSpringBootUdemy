@@ -1,5 +1,8 @@
 package br.com.lassulfi.controller;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.lassulfi.data.vo.PersonVO;
-import br.com.lassulfi.data.vo.v2.PersonVOv2;
 import br.com.lassulfi.service.PersonService;
 
 @RestController
@@ -46,8 +48,10 @@ public class PersonController {
 	
 	@GetMapping(value = "/{id}", produces = {"application/json", "application/xml", "application/x-yaml"})
 	public PersonVO findById(@PathVariable("id") Long id) {
+		PersonVO personVO = personService.findById(id);
+		personVO.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
 		
-		return personService.findById(id);
+		return personVO;
 	}
 		
 	@DeleteMapping(value = "/{id}")

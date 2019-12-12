@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import br.com.lassulfi.serialization.converter.YAMLJackson2HttpMessageConverter;
 
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 	
 	private static final MediaType MEDIA_TYPE_YAML = MediaType.valueOf("application/x-yaml");

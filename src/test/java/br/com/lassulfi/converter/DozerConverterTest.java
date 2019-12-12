@@ -24,7 +24,7 @@ public class DozerConverterTest {
 	public void parseEntityToVOTest() {
 		PersonVO output = DozerConverter.parseObject(inputObject.mockEntity(), PersonVO.class);
 
-		assertEquals(Long.valueOf(0L), output.getId());
+		assertEquals(Long.valueOf(0L), output.getKey());
 		assertEquals("First Name Test 0", output.getFirstName());
 		assertEquals("Last Name Test 0", output.getLastName());
 		assertEquals("Address Test 0", output.getAddress());
@@ -36,7 +36,7 @@ public class DozerConverterTest {
 		List<PersonVO> outputList = DozerConverter.parseListOfObjects(inputObject.mockEntityList(), PersonVO.class);
 		PersonVO outputZero = outputList.get(0);
 
-		assertEquals(Long.valueOf(0L), outputZero.getId());
+		assertEquals(Long.valueOf(0L), outputZero.getKey());
 		assertEquals("First Name Test 0", outputZero.getFirstName());
 		assertEquals("Last Name Test 0", outputZero.getLastName());
 		assertEquals("Address Test 0", outputZero.getAddress());
@@ -44,7 +44,7 @@ public class DozerConverterTest {
 
 		PersonVO outputSeven = outputList.get(7);
 
-		assertEquals(Long.valueOf(7L), outputSeven.getId());
+		assertEquals(Long.valueOf(7L), outputSeven.getKey());
 		assertEquals("First Name Test 7", outputSeven.getFirstName());
 		assertEquals("Last Name Test 7", outputSeven.getLastName());
 		assertEquals("Address Test 7", outputSeven.getAddress());
@@ -52,7 +52,7 @@ public class DozerConverterTest {
 		
 		PersonVO outputTwelve = outputList.get(12);
 
-		assertEquals(Long.valueOf(12L), outputTwelve.getId());
+		assertEquals(Long.valueOf(12L), outputTwelve.getKey());
 		assertEquals("First Name Test 12", outputTwelve.getFirstName());
 		assertEquals("Last Name Test 12", outputTwelve.getLastName());
 		assertEquals("Address Test 12", outputTwelve.getAddress());

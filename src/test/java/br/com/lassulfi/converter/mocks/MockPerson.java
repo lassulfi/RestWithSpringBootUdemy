@@ -51,7 +51,7 @@ public class MockPerson {
 		person.setFirstName("First Name Test " + number);
 		person.setLastName("Last Name Test " + number);
 		person.setGender(number % 2 == 0 ? "male" : "female");
-		person.setId(Long.valueOf(number));
+		person.setKey(Long.valueOf(number));
 		
 		return person;
 	}
