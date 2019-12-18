@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.lassulfi.data.vo.PersonVO;
 import br.com.lassulfi.service.PersonService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@Api(value = "Person Endpoint", description = "Person resource operations", tags = { "Person" })
 @RestController
 @RequestMapping("/api/person/v1")
 public class PersonController {
@@ -26,6 +29,7 @@ public class PersonController {
 	@Autowired
 	private PersonService personService;
 
+	@ApiOperation(value = "creates a person entity")
 	@PostMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, consumes = {
 			"application/json", "application/xml", "application/x-yaml" })
 	public PersonVO create(@RequestBody PersonVO person) {
@@ -37,11 +41,12 @@ public class PersonController {
 	}
 
 //	@PostMapping("/v2")
-//	public PersonVOv2 createv2(@RequestBody PersonVOv2 person) {
+//	public PersonVOv2 createv2(@ResquestBody PersonVOv2 person) {
 //		
 //		return personService.createv2(person);
 //	}
 
+	@ApiOperation(value = "updates a person entity")
 	@PutMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, consumes = {
 			"application/json", "application/xml", "application/x-yaml" })
 	public PersonVO update(@RequestBody PersonVO person) {
@@ -52,6 +57,7 @@ public class PersonController {
 		return personVO;
 	}
 
+	@ApiOperation(value = "find a person by id")
 	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public PersonVO findById(@PathVariable("id") Long id) {
 		PersonVO personVO = personService.findById(id);
@@ -60,6 +66,7 @@ public class PersonController {
 		return personVO;
 	}
 
+	@ApiOperation(value = "deletes a person entity based on its id")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
 
@@ -68,6 +75,7 @@ public class PersonController {
 		return ResponseEntity.ok().build();
 	}
 
+	@ApiOperation(value = "returns a list of all persons")
 	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
 	public List<PersonVO> findAll() {
 

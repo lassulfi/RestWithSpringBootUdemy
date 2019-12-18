@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.lassulfi.data.vo.BookVO;
 import br.com.lassulfi.service.BookService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@Api(value = "Books endpoint", description = "Books resource operations", tags = { "Books" })
 @RestController
 @RequestMapping("/api/books/v1")
 public class BookController {
@@ -24,6 +27,7 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 	
+	@ApiOperation(value = "creates a book entity")
 	@PostMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, 
 			consumes = { "application/json", "application/xml", "application/x-yaml" })
 	public BookVO create(@RequestBody BookVO book) {
@@ -33,6 +37,7 @@ public class BookController {
 		return bookVO;
 	}
 	
+	@ApiOperation(value = "updates a book entity")
 	@PutMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, 
 			consumes = { "application/json", "application/xml", "application/x-yaml" })
 	public BookVO update(@RequestBody BookVO book) {
@@ -42,6 +47,7 @@ public class BookController {
 		return bookVO;
 	}
 	
+	@ApiOperation(value = "gets a book by its id")
 	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public BookVO findById(@PathVariable("id") Long id) {
 		BookVO bookVO = bookService.findById(id);
@@ -50,6 +56,7 @@ public class BookController {
 		return bookVO;
 	}
 	
+	@ApiOperation(value = "gets a list of all books")
 	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
 	public List<BookVO> findAll() {
 		List<BookVO> books = bookService.findAll();
