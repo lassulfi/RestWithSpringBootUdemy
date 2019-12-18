@@ -2,22 +2,32 @@ package br.com.lassulfi.converter;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.lassulfi.converter.mocks.MockBook;
 import br.com.lassulfi.converter.mocks.MockPerson;
 import br.com.lassulfi.data.model.Person;
+import br.com.lassulfi.data.vo.BookVO;
 import br.com.lassulfi.data.vo.PersonVO;
 
 public class DozerConverterTest {
 
 	MockPerson inputObject;
+	
+	MockBook bookInputObject;
+	
+	SimpleDateFormat formatter;
 
 	@Before
 	public void setUp() {
 		inputObject = new MockPerson();
+		bookInputObject = new MockBook();
+		formatter = new SimpleDateFormat("dd/MM/yyyy");
 	}
 
 	@Test
@@ -29,6 +39,18 @@ public class DozerConverterTest {
 		assertEquals("Last Name Test 0", output.getLastName());
 		assertEquals("Address Test 0", output.getAddress());
 		assertEquals("male", output.getGender());
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void parseBookEntityToVOTest() throws ParseException {
+		BookVO output = DozerConverter.parseObject(bookInputObject.mockEntity(), BookVO.class);
+		
+		assertEquals(Long.valueOf(1L), output.getKey());
+		assertEquals("Author Test 1", output.getAuthor());
+		assertEquals("Book Title 1", output.getTitle());
+		assertEquals(formatter.parse("01/01/2001"), output.getLaunchDate());
+		assertEquals(new Float(1.0f), output.getPrice());
 	}
 
 	@Test
