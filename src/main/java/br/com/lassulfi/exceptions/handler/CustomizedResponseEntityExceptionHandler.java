@@ -11,6 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.lassulfi.exceptions.ExceptionResponse;
+import br.com.lassulfi.exceptions.InvalidJwtAuthenticationException;
 import br.com.lassulfi.exceptions.ResourceNotFoundException;
 import br.com.lassulfi.exceptions.UnsuportedMathOperationException;
 
@@ -46,5 +47,14 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 						request.getDescription(false));
 	
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(InvalidJwtAuthenticationException.class)
+	public final ResponseEntity<ExceptionResponse> handleInvalidJwtAuthenticationException(Exception exception, WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), 
+				exception.getMessage(), 
+				request.getDescription(false));
+		
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
 }
