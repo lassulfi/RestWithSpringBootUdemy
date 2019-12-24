@@ -86,7 +86,8 @@ public class PersonController {
 
 	@ApiOperation(value = "returns a list of all persons")
 	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
-	public ResponseEntity<PagedResources<PersonVO>> findAll(@RequestParam(value = "page", defaultValue = "0") int page,
+	public ResponseEntity<PagedResources<PersonVO>> findAll(
+			@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "limit", defaultValue = "12") int limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction, 
 			PagedResourcesAssembler assembler) {
