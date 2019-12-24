@@ -25,3 +25,6 @@ HELP.md
 /.nb-gradle/
 /build/
 .metadata/
+
+### Attachment files ###
+.attach_*
