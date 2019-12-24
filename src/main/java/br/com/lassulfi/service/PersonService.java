@@ -1,7 +1,5 @@
 package br.com.lassulfi.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -86,5 +84,11 @@ public class PersonService {
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 		
 		return DozerConverter.parseObject(personEntity, PersonVO.class);
+	}
+	
+	public Page<PersonVO> findPersonByFirstName(String firstName, Pageable pageable) {
+		var page = personRepository.findPersonByFirstName(firstName, pageable);
+		
+		return page.map(this::convertToPersonVO);
 	}
 }
