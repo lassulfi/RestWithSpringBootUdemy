@@ -10,8 +10,8 @@ before_deploy:
 deploy:
     provider: script
     script:
-        docker push lassulfi/mysql-rest-with-sring-boot-udemy
-        docker push lassulfi/rest-with-spring-boot-udemy
+       - docker push lassulfi/mysql-rest-with-sring-boot-udemy
+       - docker push lassulfi/rest-with-spring-boot-udemy
     on:
         branch: master
 notifications:
