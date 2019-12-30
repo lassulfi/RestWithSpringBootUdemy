@@ -1,0 +1,18 @@
+language: bash
+services: docker
+before_install:
+    - cd RestWithSpringBootUdemy
+    - echo "Switching to Docker files folder"
+script:
+    - docker-compose build
+before_deploy:
+    - echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
+deploy:
+    provider: script
+    script:
+        docker push lassulfi/mysql-rest-with-sring-boot-udemy
+        docker push lassulfi/rest-with-spring-boot-udemy
+    on:
+        branch: master
+notifications:
+    email: false
