@@ -29,8 +29,8 @@ public class SwaggerConfig {
 
 	private ApiInfo apiInfo() {
 		return new ApiInfo(
-				"RESTful API With Spring Boot 2.1.3", 
-				"RESTful API developed in Java using Spring Boot Framework version 2.1.3", 
+				"RESTful API With Spring Boot 2.1.3 - AWS", 
+				"RESTful API developed in Java using Spring Boot Framework version 2.1.3 - AWS", 
 				"v1", 
 				"Terms of Service URL", 
 				new Contact(
