@@ -28,3 +28,7 @@ HELP.md
 
 ### Attachment files ###
 .attach_*
+
+### AWS files ###
+*.pem
+*.csv
