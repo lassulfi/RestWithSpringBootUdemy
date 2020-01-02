@@ -8,7 +8,7 @@ python:
 services: docker
 before_install:
     - sudo apt-get update
-    - cd RestWithSpringBootUdemy/RestWithSpringBootUdemy
+    - cd RestWithSpringBootUdemy/RestWithSpringBootUdemy/
     - echo "Switching to application folder"
     - echo "Starting maven package"
     - mvn clean package
